@@ -1,0 +1,28 @@
+body {
+    background-color: #FAFBFD;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+}
+
+button {
+    cursor: pointer;
+}
+
+.bg-violet-custom {
+    background-color: #773ff8;
+}
+
+.bg-violet-custom-btn {
+    background-color: #773ff8;
+    transition: all 0.2s ease-in-out;
+}
+
+.hover-violet-custom-btn:hover {
+    background-color: #6e30d8;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.hover-violet-custom-btn:hover.noactive {
+    background-color: #6e30d8;
+    transition: all 0.2s ease-in-out;
+}
