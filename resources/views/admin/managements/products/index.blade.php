@@ -172,7 +172,7 @@
                 </div>
 
                 <div x-show="isOpen" x-cloak x-transition.opacity
-                    class="fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-40 backdrop-blur-sm z-40" @click="close()"
+                    class="fixed inset-0 bg-[rgba(0,0,0,0.5)] bg-opacity-40 backdrop-blur-sm z-50" @click="close()"
                     aria-hidden="true">
                 </div>
                 <div x-show="isOpen" x-cloak x-transition class="fixed inset-0 flex items-center justify-center z-50 p-4">
@@ -308,7 +308,7 @@
                 </div>
 
                 <div x-show="deleteModal" x-cloak x-transition
-                    class="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center bg-opacity-40 backdrop-blur-sm z-40">
+                    class="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center bg-opacity-40 backdrop-blur-sm z-50">
                     <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-6">
                         <div class="flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -342,7 +342,7 @@
                 </div>
 
                 <div x-show="restockModal" x-cloak x-transition
-                    class="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center bg-opacity-40 backdrop-blur-sm z-40">
+                    class="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center bg-opacity-40 backdrop-blur-sm z-50">
                     <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-6">
                         <div class="flex items-center gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

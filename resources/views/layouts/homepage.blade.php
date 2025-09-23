@@ -40,7 +40,7 @@
     </style>
 </head>
 
-<body class="bg-gray-100 font-poppins @yield('bodyClass', '')" x-data="{ sidebarOpen: false }">
+<body class="bg-gray-100 font-poppins @yield('bodyClass', '')" x-data="{ sidebarOpen: false, logoutModal: false }">
     <div id="sidebar"
         class="sidebar bg-gray-50 rounded-r-xl shadow-xl w-64 fixed top-0 bottom-0 left-0 z-50 flex flex-col transform transition-transform duration-300 ease-in-out -translate-x-full lg:hidden"
         :class="{ 'translate-x-0': sidebarOpen }">
@@ -55,7 +55,7 @@
         </div>
         <nav class="flex-1 overflow-y-auto">
             <ul class="space-y-3 p-4 font-medium">
-                <li><a href="/dashboard"
+                <li><a href="/home"
                         class="block px-4 py-2 rounded-lg {{ Request::is('home') ? 'bg-violet-100 border border-violet-300 text-violet-700' : 'text-gray-500' }}">
                         <div class="flex items-center gap-x-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -116,7 +116,8 @@
                         <li>
                             <form method="POST" action="{{ route('logout') }}" id="logout-form">
                                 @csrf
-                                <button type="button" @click="logoutModal = true"
+                                <button type="button"
+                                    @click="sidebarOpen = false; setTimeout(() => logoutModal = true, 300)"
                                     class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition-colors duration-300 pl-10">
                                     Logout
                                 </button>
@@ -255,8 +256,31 @@
 
         </div>
     </div>
-
-    @stack('scripts')
+    <div x-show="logoutModal" x-cloak x-transition
+        class="fixed inset-0 bg-[rgba(0,0,0,0.5)] flex items-center justify-center bg-opacity-40 backdrop-blur-sm z-50">
+        <div class="bg-white rounded-lg shadow-2xl w-full max-w-md p-6">
+            <div class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                    class="h-10 w-10 text-red-500 flex-shrink-0">
+                    <path fill-rule="evenodd"
+                        d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                        clip-rule="evenodd" />
+                </svg>
+                <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
+            </div>
+            <p class="mt-4 text-gray-600">Apakah anda yakin ingin logout?</p>
+            <div class="flex justify-end gap-3 mt-6">
+                <button @click="logoutModal = false;"
+                    class="bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg">
+                    Batal
+                </button>
+                <button type="submit" form="logout-form"
+                    class="bg-red-100 hover:bg-red-200 border border-red-300 text-red-700 px-4 py-2 rounded-lg">
+                    Ya, Logout
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

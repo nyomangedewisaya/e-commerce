@@ -42,7 +42,7 @@
 
 <body class="bg-gray-200 font-poppins" x-data="{ sidebarOpen: false, logoutModal: false }">
     <div id="sidebar"
-        class="sidebar bg-gray-50 rounded-r-xl shadow-xl w-64 fixed top-0 bottom-0 left-0 z-60 flex flex-col transform transition-transform duration-300 ease-in-out -translate-x-full lg:translate-x-0"
+        class="sidebar bg-gray-50 rounded-r-xl shadow-xl w-64 fixed top-0 bottom-0 left-0 z-30 flex flex-col transform transition-transform duration-300 ease-in-out -translate-x-full lg:translate-x-0"
         :class="{ 'translate-x-0': sidebarOpen }">
         <div
             class="p-4 font-bold text-2xl text-violet-700 border-b border-gray-100 flex items-center justify-center gap-x-3">
@@ -167,12 +167,13 @@
                 <li>
                     <form method="POST" action="{{ route('logout') }}" id="logout-form">
                         @csrf
-                        <button type="button" @click="sidebarOpen = false; setTimeout(() => logoutModal = true, 300)"  class="w-full block px-4 py-2 rounded-lg bg-red-100 hover:bg-red-200 border border-red-300 text-red-700">
+                        <button type="button" @click="sidebarOpen = false; setTimeout(() => logoutModal = true, 300)"
+                            class="w-full block px-4 py-2 rounded-lg bg-red-100 hover:bg-red-200 border border-red-300 text-red-700">
                             <div class="flex items-center gap-x-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                            mobileidebarOpen: false             d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" mobileidebarOpen: false
+                                        d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
                                 </svg>
                                 Logout
                             </div>
@@ -182,10 +183,10 @@
             </ul>
         </div>
     </div>
-    <div x-show="sidebarOpen" @click="sidebarOpen = false" x-cloak class="fixed inset-0 bg-black/50 z-50 lg:hidden">
+    <div x-show="sidebarOpen" @click="sidebarOpen = false" x-cloak class="fixed inset-0 bg-black/50 z-20 lg:hidden">
     </div>
     <main class="lg:ml-66 transition-all duration-300 ease-in-out">
-        <div class="lg:hidden p-4 bg-gray-50 shadow-md flex items-center justify-between sticky top-0 z-30">
+        <div class="lg:hidden p-4 bg-gray-50 shadow-md flex items-center justify-between sticky top-0 z-10">
             <button @click.stop="sidebarOpen = !sidebarOpen" class="text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
@@ -213,7 +214,7 @@
                 </svg>
                 <h2 class="text-lg font-semibold text-gray-800">Konfirmasi Logout</h2>
             </div>
-            <p class="mt-4 text-gray-600">Apakah anda yakin ingin logout dari Admin?</p>
+            <p class="mt-4 text-gray-600">Apakah anda yakin ingin logout?</p>
             <div class="flex justify-end gap-3 mt-6">
                 <button @click="logoutModal = false;"
                     class="bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg">

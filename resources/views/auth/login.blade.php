@@ -1,21 +1,23 @@
 @extends('auth.master')
 @section('title', 'Login')
 @section('content')
-    <div x-data="{ loaded: false }" x-init="setTimeout(() => { loaded = true;
-        $dispatch('page-loaded') }, 200)">
+    <div x-data="{ loaded: false }" x-init="setTimeout(() => {
+        loaded = true;
+        $dispatch('page-loaded')
+    }, 200)">
         <div x-show="loaded" x-cloak x-transition:enter="transition-all ease-out duration-1000"
             x-transition:enter-start="opacity-0 transform translate-y-8"
             x-transition:enter-end="opacity-100 transform translate-y-0">
             <div class="sm:mx-auto sm:w-full sm:max-w-md mb-5">
                 <h2 class="text-center text-3xl font-extrabold text-white">
-                    Login to Your Account
+                    Login ke akun Anda
                 </h2>
                 <p class="mt-2 text-center text-sm text-white">
-                    Welcome back! Please enter your details.
+                    Selamat datang! Tolong masukan data lengkap anda.
                 </p>
             </div>
             <div
-                class="bg-white rounded-xl w-[80vw] lg:w-[30vw] flex flex-col justify-center items-center shadow-lg border border-gray-100">
+                class="bg-white rounded-xl w-full max-w-lg flex flex-col justify-center items-center shadow-lg border border-gray-100">
                 <div class="headers px-5 p-4 flex flex-col items-center w-full">
                     <h2 class="text-lg font-semibold text-gray-700">Login Account</h2>
                 </div>
@@ -81,6 +83,10 @@
                         Login
                     </button>
                 </form>
+                <p class="py-4 text-center text-sm text-gray-600">
+                    Belum punya akun?
+                    <a href="{{ route('register') }}" class="font-medium text-violet-600 hover:underline">Daftar di sini</a>
+                </p>
             </div>
         </div>
     </div>

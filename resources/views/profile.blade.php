@@ -35,46 +35,37 @@
                     class="bg-yellow-100 hover:bg-yellow-200 border border-yellow-300 text-yellow-700 rounded-lg px-3 py-2 transition-colors duration-300">
                     Ganti Password
                 </button>
-                @if (auth()->user()->role !== 'admin')
-                    <form method="POST" onsubmit="return confirm('Yakin ingin hapus akun?')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="bg-red-100 hover:bg-red-200 border border-red-300 text-red-700 rounded-lg px-3 py-2 transition-colors duration-300">
-                            Hapus Akun
-                        </button>
-                    </form>
-                @endif
             </div>
         </div>
 
         <div class="mt-10">
             <div class="flex items-center justify-between mb-6">
-                <h3 class="text-xl font-bold text-gray-800">Histori Transaksi</h3>
-                <form action="{{ route('profile.index') }}" method="GET" class="relative w-full sm:w-auto">
-                    <input type="text" name="invoice" x-model="searchQuery" value="{{ request('invoice') }}"
-                        class="w-full bg-gray-100 rounded-3xl border border-gray-300 pl-4 pr-10 py-3 focus:outline-none"
-                        placeholder="Cari nomor invoice...">
+                @if ($orders->isNotEmpty())
+                    <h3 class="text-xl font-bold text-gray-800">Histori Transaksi</h3>
+                    <form action="{{ route('profile.index') }}" method="GET" class="relative w-full sm:w-auto">
+                        <input type="text" name="invoice" x-model="searchQuery" value="{{ request('invoice') }}"
+                            class="w-full bg-gray-100 rounded-3xl border border-gray-300 pl-4 pr-10 py-3 focus:outline-none"
+                            placeholder="Cari nomor invoice...">
 
-                    <button type="button" x-show="searchQuery"
-                        @click="window.location.href = '{{ route('profile.index') }}'"
-                        class="absolute inset-y-0 right-0 flex items-center pr-5 text-gray-500 hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                            <path
-                                d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
-                        </svg>
-                    </button>
+                        <button type="button" x-show="searchQuery"
+                            @click="window.location.href = '{{ route('profile.index') }}'"
+                            class="absolute inset-y-0 right-0 flex items-center pr-5 text-gray-500 hover:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                <path
+                                    d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+                            </svg>
+                        </button>
 
-                    <button type="submit" x-show="!searchQuery"
-                        class="absolute inset-y-0 right-0 flex items-center pr-5 text-gray-500 hover:text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="size-5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                        </svg>
-                    </button>
-                </form>
-
+                        <button type="submit" x-show="!searchQuery"
+                            class="absolute inset-y-0 right-0 flex items-center pr-5 text-gray-500 hover:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="size-5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                            </svg>
+                        </button>
+                    </form>
+                @endif
             </div>
 
             <div class="space-y-4">
@@ -141,18 +132,18 @@
                                             </p>
                                         </div>
                                     </div>
-                                    @if ($order->status === 'pending')
-                                        <div class="mt-4 pt-4 flex justify-end">
-                                            <button
-                                                @click="cancelModalOpen = true; cancelUrl = '{{ route('orders.cancelByUser', $order) }}'"
-                                                class="bg-red-100 hover:bg-red-200 border border-red-300 text-red-700 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
-                                                Batalkan Pesanan
-                                            </button>
-                                        </div>
-                                    @endif
                                 @empty
                                     <p class="text-sm text-gray-500 text-center py-4">Item pesanan tidak ditemukan.</p>
                                 @endforelse
+                                @if ($order->status === 'pending')
+                                    <div class="mt-4 pt-4 flex justify-end">
+                                        <button
+                                            @click="cancelModalOpen = true; cancelUrl = '{{ route('orders.cancelByUser', $order) }}'"
+                                            class="bg-red-100 hover:bg-red-200 border border-red-300 text-red-700 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+                                            Batalkan Pesanan
+                                        </button>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -185,13 +176,15 @@
                 <p class="mt-2 text-sm text-gray-500">Stok produk akan dikembalikan dan pesanan ini tidak dapat dipulihkan.
                     Anda yakin?</p>
                 <div class="flex justify-center gap-4 mt-6">
-                    <button @click="cancelModalOpen = false" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors duration-300">
+                    <button @click="cancelModalOpen = false"
+                        class="bg-gray-100 hover:bg-gray-200 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg transition-colors duration-300">
                         Tidak
                     </button>
                     <form :action="cancelUrl" method="POST">
                         @csrf
                         @method('PATCH')
-                        <button type="submit" class="bg-red-100 hover:bg-red-200 border border-red-300 text-red-700 px-4 py-2 rounded-lg transition-colors duration-300">
+                        <button type="submit"
+                            class="bg-red-100 hover:bg-red-200 border border-red-300 text-red-700 px-4 py-2 rounded-lg transition-colors duration-300">
                             Ya, Batalkan
                         </button>
                     </form>

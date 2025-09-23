@@ -51,7 +51,7 @@
                                     <button @click="removeItem(item.product.id)"
                                         class="mt-2 rounded-md px-1 py-0.5 bg-red-100 hover:bg-red-200 border border-red-300 text-red-700 text-xs font-semibold transition-colors duration-300">Hapus</button>
                                 </div>
-                                <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-2 mr-5">
                                     <button @click="changeQuantity(item, -1)" :disabled="item.quantity <= 1"
                                         class="p-1 border rounded-full disabled:opacity-50"><svg class="size-4"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -63,7 +63,7 @@
                                         class="p-1 border rounded-full disabled:opacity-50"><svg class="size-4"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="2" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                            <path stroke-linecap="round" stroke-linejoin="r>ound"
                                                 d="M12 4.5v15m7.5-7.5h-15" />
                                         </svg></button>
                                 </div>
@@ -76,7 +76,8 @@
                 </div>
                 <div class="lg:w-96 flex-shrink-0 bg-white rounded-lg shadow-md p-6">
                     <div class="h-[430px] flex flex-col">
-                        <h2 class="text-xl font-bold text-gray-800 border-b border-gray-300 pb-4 mb-4 flex-shrink-0">Ringkasan Pesanan</h2>
+                        <h2 class="text-xl font-bold text-gray-800 border-b border-gray-300 pb-4 mb-4 flex-shrink-0">
+                            Ringkasan Pesanan</h2>
                         <div class="flex-1 overflow-y-auto">
                             <h3 class="text-md font-semibold text-gray-700 mb-3">Pilih Metode Pembayaran</h3>
                             <div class="space-y-2">

@@ -46,6 +46,20 @@ class CategoriesController extends Controller
         $validated['slug'] = Str::slug($validated['name']);
 
         $category->update($validated);
-        return redirect()->route('categories.index')->with('success', 'Kategori berhasil diedit!');
+        return redirect()->route('managements.categories.index')->with('success', 'Kategori berhasil diedit!');
+    }
+
+    public function destroy(Category $category)
+    {
+        if ($category->products()->count() > 0) {
+            return redirect()->back()->with('error', 'Kategori ini tidak bisa dihapus karena masih memiliki produk.');
+        }
+
+        try {
+            $category->delete();
+            return redirect()->route('managements.categories.index')->with('success', 'Kategori berhasil dihapus.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus kategori.');
+        }
     }
 }

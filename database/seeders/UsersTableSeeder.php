@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -9,38 +10,17 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
-class UsersTableSeeder extends Seeder
+class UsersTableSeeder extends Seeder 
 {
-    public function run()
+    public function run(): void
     {
-        $now = Carbon::now();
-
-        $customers = [
-            ['name' => 'Andi Saputra'],
-            ['name' => 'Budi Santoso'],
-            ['name' => 'Citra Lestari'],
-            ['name' => 'Dewi Anggraini'],
-            ['name' => 'Eko Prasetyo'],
-            ['name' => 'Fitri Handayani'],
-            ['name' => 'Gilang Permana'],
-            ['name' => 'Hani Ramadhani'],
-            ['name' => 'Indra Wijaya'],
-            ['name' => 'Joko Susilo'],
-        ];
-
-        foreach ($customers as $customer) {
-            $firstName = explode(' ', $customer['name'])[0]; // ambil nama depan
-            $email = Str::lower($firstName) . '@gmail.com';
-            $password = Hash::make($firstName . '123');
-
-            DB::table('users')->insert([
-                'name' => $customer['name'],
-                'email' => $email,
-                'password' => $password,
-                'role' => 'customer',
-                'created_at' => $now,
-                'updated_at' => $now,
-            ]);
-        }
+        User::updateOrCreate(
+            ['email' => 'okta@gmail.com'], // supaya tidak dobel
+            [
+                'name' => 'Okta Ferdian',
+                'password' => Hash::make('okta1234'), // password terenkripsi
+                'role' => 'customer', // opsional kalau ada kolom role
+            ]
+        );
     }
 }
