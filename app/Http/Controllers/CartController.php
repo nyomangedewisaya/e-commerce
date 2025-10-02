@@ -158,7 +158,7 @@ class CartController extends Controller
                 $order = Order::create([
                     'user_id' => Auth::id(),
                     'total_amount' => $totalAmount,
-                    'order_code' => 'ORD-' . strtoupper(Str::random(10)),
+                    'order_code' => 'ORD-' . Str::upper(Str::random(10)) . '-' . Str::upper(Str::random(5)),
                     'status' => 'pending',
                 ]);
 
@@ -177,7 +177,7 @@ class CartController extends Controller
                     'order_id' => $order->id,
                     'amount' => $order->total_amount,
                     'method' => $request->payment_method,
-                    'invoice' => 'INV-' . strtoupper(Str::random(10)),
+                    'invoice' => 'INV-' . Str::upper(Str::random(10)) . '-' . Str::upper(Str::random(5)),
                 ]);
 
                 session()->forget('cart');
